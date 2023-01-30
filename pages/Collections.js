@@ -5,7 +5,7 @@ import {
 import { useState } from "react";
 
 function Collections() {
-  const [cursor, setCursor] = (useState < string) | (undefined > undefined);
+  const [cursor, setCursor] = useState("");
   const { collections, pageInfo } = useTrendingCollections({
     orderBy: "VOLUME",
     orderDirection: "DESC",
