@@ -1,4 +1,4 @@
-import "@/styles/globals.css";
+import "../styles/globals.css";
 // require("dotenv").config();
 import { IcyProvider } from "@quicknode/icy-nft-hooks";
 
