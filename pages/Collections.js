@@ -6,12 +6,9 @@ import { useState, useEffect } from "react";
 
 function Collections() {
   const [cursor, setCursor] = useState("");
-  // const [collections, setCollections] = useState();
-  // const [pageInfo, setPageInfo] = useState();
   const [timePeriod, setTimePeriod] = useState(TrendingCollectionsTimePeriod.TWELVE_HOURS);
   const [orderBy, setOrderBy] = useState("VOLUME");
   const [orderDir, setOrderDir] = useState("DESC");
-  // useEffect(() => {
   const { collections, pageInfo } = useTrendingCollections({
     orderBy: orderBy,
     orderDirection: orderDir,
@@ -19,9 +16,6 @@ function Collections() {
     first: 10,
     after: cursor,
   });
-  // setCollections(token.collections);
-  // setPageInfo(token.pageInfo);
-  // }, [timePeriod]);
 
   return (
     <div className="App bg-black text-white">
@@ -38,12 +32,14 @@ function Collections() {
         <button className='text-xl text-cyan-500' onClick={() => setOrderBy("AVERAGE")}>Average</button>
         <button className='text-xl text-cyan-500' onClick={() => setOrderBy("VOLUME")}>Volume</button>
       </div>
-      <div className='w-full flex justify-end gap-3'>
-        <div className='text-xl'>Order By</div>
-        <button className='text-xl text-cyan-500' onClick={() => setOrderDir("DESC")}>Descending</button>
-        <button className='text-xl text-cyan-500' onClick={() => setOrderDir("ASC")}>Ascending</button>
-      </div>
-      <table className='table-auto border-separate border border-slate-400 w-full text-sm text-left text-white'>
+      <fieldset className='w-full flex justify-end gap-3'>
+        <div className='text-xl'>Order Direction</div>
+        <input id="desc" type="radio" name="orderDir" className='text-xl text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500' onClick={() => setOrderDir("DESC")}/>
+        <label for="desc" className="text-xl text-cyan-500">Descending</label>
+        <input id="asc" type="radio" name="orderDir" className='text-xl text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500' onClick={() => setOrderDir("ASC")}/>
+        <label for="asc" className="text-xl text-cyan-500">Ascending</label>
+      </fieldset>
+      <table className='table-auto border-separate border border-slate-400 w-full text-sm text-left text-white my-5'>
         <thead className='table-header-group text-xl'>
           <tr className='table-row'>
             <th scope="col" className='table-cell text-left px-6 py-3'>Collection</th>

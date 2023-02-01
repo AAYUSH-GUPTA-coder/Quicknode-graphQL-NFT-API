@@ -3,7 +3,7 @@ import { useState } from "react";
 
 function WalletNFTs() {
   const [ensName, setEnsName] = useState("");
-  const [cursor, setCursor] = (useState < string) | (undefined > undefined);
+  const [cursor, setCursor] = useState("");
   const { nfts, isSearchValid, pageInfo } = useWalletNFTs({
     ensName,
     first: 10,
@@ -11,8 +11,8 @@ function WalletNFTs() {
   });
 
   return (
-    <div className="WalletNFT">
-      <div style={{ display: "flex", alignItems: "center" }}>
+    <div className="WalletNFT bg-black text-white">
+      <div className='w-full h-full flex flex-row justify-evenly items-center'>
         <div className="search">
           <input
             type="text"
@@ -25,25 +25,22 @@ function WalletNFTs() {
           />
         </div>
       </div>
-
       {nfts.map((nft) => {
         const contract = nft.contract;
         const imageUrl = nft.images.find((i) => !!i.url)?.url;
 
         return (
-          <div className="card" key={`${nft.tokenId}${nft.contract.address}`}>
-            <div className="top">
-              <div>
-                <h1>{contract.name}</h1>
-                <h2>
-                  {contract.symbol}#{nft.tokenId}
-                </h2>
+          <div className="bg-gray-800 w-1/5 h-fit rounded-md" key={`${nft.tokenId}${nft.contract.address}`}>
+            {imageUrl && (
+              <div className="p-3 w-full h-auto">
+                <img src={imageUrl} alt="nft awesome" />
               </div>
-              {imageUrl && (
-                <div className="img">
-                  <img src={imageUrl} alt="lol" />
-                </div>
-              )}
+            )}
+            <div>
+              <h1>{contract.name}</h1>
+              <h2>
+                {contract.symbol}#{nft.tokenId}
+              </h2>
             </div>
           </div>
         );
