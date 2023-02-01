@@ -9,27 +9,39 @@ function Collections() {
   // const [collections, setCollections] = useState();
   // const [pageInfo, setPageInfo] = useState();
   const [timePeriod, setTimePeriod] = useState("TWELVE_HOURS");
+  const [orderBy, setOrderBy] = useState("VOLUME");
+  const [orderDir, setOrderDir] = useState("DESC");
   // useEffect(() => {
-    const { collections, pageInfo } = useTrendingCollections({
-      orderBy: "VOLUME",
-      orderDirection: "DESC",
-      timePeriod: TrendingCollectionsTimePeriod.timePeriod,
-      first: 10,
-      after: cursor,
-    });
-    // setCollections(token.collections);
-    // setPageInfo(token.pageInfo);
+  const { collections, pageInfo } = useTrendingCollections({
+    orderBy: orderBy,
+    orderDirection: orderDir,
+    timePeriod: TrendingCollectionsTimePeriod.timePeriod,
+    first: 10,
+    after: cursor,
+  });
+  // setCollections(token.collections);
+  // setPageInfo(token.pageInfo);
   // }, [timePeriod]);
 
   return (
     <div className="App bg-black text-white">
-      console.log("working");
       <div className='w-full flex justify-end gap-3'>
         <div className='text-xl'>Stats in last</div>
-        <button className='text-xl' onclick={()=>setTimePeriod("TWELVE_HOURS")}>12 hours</button>
-        <button className='text-xl' onclick={()=>setTimePeriod("ONE_HOUR")}>1 hour</button>
-        <button className='text-xl' onclick={()=>setTimePeriod("ONE_DAY")}>1 day</button>
-        <button className='text-xl' onclick={()=>setTimePeriod("SEVEN_DAYS")}>7 days</button>
+        <button className='text-xl text-cyan-500' onClick={() => setTimePeriod("TWELVE_HOURS")}>12 hours</button>
+        <button className='text-xl text-cyan-500' onClick={() => setTimePeriod("ONE_HOUR")}>1 hour</button>
+        <button className='text-xl text-cyan-500' onClick={() => setTimePeriod("ONE_DAY")}>1 day</button>
+        <button className='text-xl text-cyan-500' onClick={() => setTimePeriod("SEVEN_DAYS")}>7 days</button>
+      </div>
+      <div className='w-full flex justify-end gap-3'>
+        <div className='text-xl'>Order By</div>
+        <button className='text-xl text-cyan-500' onClick={() => setOrderBy("SALES")}>Sales</button>
+        <button className='text-xl text-cyan-500' onClick={() => setOrderBy("AVERAGE")}>Average</button>
+        <button className='text-xl text-cyan-500' onClick={() => setOrderBy("VOLUME")}>Volume</button>
+      </div>
+      <div className='w-full flex justify-end gap-3'>
+        <div className='text-xl'>Order By</div>
+        <button className='text-xl text-cyan-500' onClick={() => setTimePeriod("DESC")}>Descending</button>
+        <button className='text-xl text-cyan-500' onClick={() => setTimePeriod("ASC")}>Ascending</button>
       </div>
       <table className='table-auto border-separate border border-slate-400 w-full text-sm text-left text-white'>
         <thead className='table-header-group text-xl'>
@@ -63,8 +75,9 @@ function Collections() {
             onClick={() => {
               setCursor(pageInfo.endCursor ?? undefined);
             }}
+            className="rounded-md bg-blue-900 p-5"
           >
-            Next
+            Next &gt;
           </button>
         </div>
       )}
