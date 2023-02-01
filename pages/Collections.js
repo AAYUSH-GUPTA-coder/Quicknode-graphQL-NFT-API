@@ -8,14 +8,14 @@ function Collections() {
   const [cursor, setCursor] = useState("");
   // const [collections, setCollections] = useState();
   // const [pageInfo, setPageInfo] = useState();
-  const [timePeriod, setTimePeriod] = useState("TWELVE_HOURS");
+  const [timePeriod, setTimePeriod] = useState(TrendingCollectionsTimePeriod.TWELVE_HOURS);
   const [orderBy, setOrderBy] = useState("VOLUME");
   const [orderDir, setOrderDir] = useState("DESC");
   // useEffect(() => {
   const { collections, pageInfo } = useTrendingCollections({
     orderBy: orderBy,
     orderDirection: orderDir,
-    timePeriod: TrendingCollectionsTimePeriod.timePeriod,
+    timePeriod: timePeriod,
     first: 10,
     after: cursor,
   });
@@ -27,10 +27,10 @@ function Collections() {
     <div className="App bg-black text-white">
       <div className='w-full flex justify-end gap-3'>
         <div className='text-xl'>Stats in last</div>
-        <button className='text-xl text-cyan-500' onClick={() => setTimePeriod("TWELVE_HOURS")}>12 hours</button>
-        <button className='text-xl text-cyan-500' onClick={() => setTimePeriod("ONE_HOUR")}>1 hour</button>
-        <button className='text-xl text-cyan-500' onClick={() => setTimePeriod("ONE_DAY")}>1 day</button>
-        <button className='text-xl text-cyan-500' onClick={() => setTimePeriod("SEVEN_DAYS")}>7 days</button>
+        <button className='text-xl text-cyan-500' onClick={() => setTimePeriod(TrendingCollectionsTimePeriod.TWELVE_HOURS)}>12 hours</button>
+        <button className='text-xl text-cyan-500' onClick={() => setTimePeriod(TrendingCollectionsTimePeriod.ONE_HOUR)}>1 hour</button>
+        <button className='text-xl text-cyan-500' onClick={() => setTimePeriod(TrendingCollectionsTimePeriod.ONE_DAY)}>1 day</button>
+        <button className='text-xl text-cyan-500' onClick={() => setTimePeriod(TrendingCollectionsTimePeriod.SEVEN_DAYS)}>7 days</button>
       </div>
       <div className='w-full flex justify-end gap-3'>
         <div className='text-xl'>Order By</div>
@@ -40,8 +40,8 @@ function Collections() {
       </div>
       <div className='w-full flex justify-end gap-3'>
         <div className='text-xl'>Order By</div>
-        <button className='text-xl text-cyan-500' onClick={() => setTimePeriod("DESC")}>Descending</button>
-        <button className='text-xl text-cyan-500' onClick={() => setTimePeriod("ASC")}>Ascending</button>
+        <button className='text-xl text-cyan-500' onClick={() => setOrderDir("DESC")}>Descending</button>
+        <button className='text-xl text-cyan-500' onClick={() => setOrderDir("ASC")}>Ascending</button>
       </div>
       <table className='table-auto border-separate border border-slate-400 w-full text-sm text-left text-white'>
         <thead className='table-header-group text-xl'>
